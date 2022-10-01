@@ -23,6 +23,7 @@ const BooksView = () => {
         try {
             dispatch(deleteBook(id));
             toast("Book deleted successfully");
+            handleClose();
         } catch (error) {
             console.log(error);
         }
@@ -58,7 +59,7 @@ const BooksView = () => {
 
                                     <Modal show={show2} onHide={handleClose2} animation={true}>
                                         <Modal.Header closeButton>
-                                            <Modal.Title>{bookName}</Modal.Title>
+                                            <Modal.Title>Book Shop</Modal.Title>
                                         </Modal.Header>
                                         <Modal.Body>Are you sure? You want to Update?</Modal.Body>
                                         <Modal.Footer>
@@ -75,7 +76,7 @@ const BooksView = () => {
                                     <Button onClick={handleShow} variant="outline-danger"><RiDeleteBin6Line /></Button>
                                     <Modal show={show} onHide={handleClose} animation={true}>
                                         <Modal.Header closeButton>
-                                            <Modal.Title>{bookName}</Modal.Title>
+                                            <Modal.Title>Book Shop</Modal.Title>
                                         </Modal.Header>
                                         <Modal.Body>Are you sure? You want to delete?</Modal.Body>
                                         <Modal.Footer>

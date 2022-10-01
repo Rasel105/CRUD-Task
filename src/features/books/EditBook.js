@@ -12,14 +12,20 @@ import { useNavigate } from 'react-router-dom';
 
 const EditBook = () => {
     const { state } = useLocation();
-
+    const navigate = useNavigate();
+    
     const [id, setId] = useState(state.id);
     const [bookName, setBookName] = useState(state.bookName);
     const [author, setAuthor] = useState(state.author);
     const [description, setDescription] = useState(state.description);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    
+    const books = {
+        bookName,
+        author,
+        description
+    }
 
     const handleSubmit = async (values) => {
         const bookDetails = {
@@ -40,13 +46,13 @@ const EditBook = () => {
 
     const EditBookDetailsSchema = object().shape({
         bookName: string()
-            .min(6, "Minimum 6 characters required")
+            .min(3, "Minimum 3 characters required")
             .required("Book Name required"),
         author: string()
-            .min(6, "Minimum 6 characters required")
+            .min(3, "Minimum 3 characters required")
             .required("Author name required"),
         description: string()
-            .min(6, "Minimum 6 characters required")
+            .min(3, "Minimum 3 characters required")
             .required("Description required"),
     });
 
@@ -54,10 +60,11 @@ const EditBook = () => {
         <div>
             <h1>Edit books</h1>
             <Formik
-                initialValues={{ bookName: "", author: "", description: "", }}
+                enableReinitialize
+                initialValues={books}
                 validationSchema={EditBookDetailsSchema}
                 onSubmit={(values, { setSubmitting }) => {
-                    setSubmitting(false);
+                    setSubmitting(true);
                     handleSubmit(values);
                 }}
             >
